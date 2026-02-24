@@ -1,3 +1,5 @@
+import { saveState } from "./storage";
+
 const appState = {
     projects: [],
     activeProjectId: null,
@@ -5,6 +7,8 @@ const appState = {
 
 function addProject(project){
     appState.projects.push(project);
+
+    saveState(getState());
 }
 
 function removeProject(id){
@@ -14,12 +18,16 @@ function removeProject(id){
     if (appState.activeProjectId === id){
         appState.activeProjectId = null;
     }
+
+    saveState(getState());
 }
 
 function setActiveProject(id){
     for (let project of appState.projects){
         if (project.getId() === id){
             appState.activeProjectId = id;
+            saveState(getState());
+            return;
         }
     }
 }

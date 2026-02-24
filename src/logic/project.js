@@ -1,3 +1,6 @@
+import { getState } from "./state";
+import { saveState } from "./storage";
+
 class Project{
     constructor(title, description){
         this.title = title;
@@ -9,9 +12,13 @@ class Project{
 
     addTask(task){
         this.tasks.push(task);
+
+        saveState(getState());
     }
     removeTask(id){
         this.tasks = this.tasks.filter(task => task.getId() !== id);
+
+        saveState(getState());
     }
     getTaskById(id){
         return this.tasks.find(task => task.getId() === id) || null;

@@ -1,3 +1,6 @@
+import { getState } from "./state";
+import { saveState } from "./storage";
+
 class Task{
     constructor(title, description, dueDate, priority){
         this.title = title;
@@ -14,12 +17,18 @@ class Task{
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+
+        saveState(getState());
     }
     updatePriority(priority){
         this.priority = priority;
+
+        saveState(getState());
     }
     toggleCompletion(){
         this.isCompleted = !this.isCompleted;
+
+        saveState(getState());
     }
 
     getPriority(){ return this.priority; }
