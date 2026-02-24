@@ -24,6 +24,11 @@ function setActiveProject(id){
     }
 }
 
+function hydrateState(state){
+    appState.projects = state.projects;
+    appState.activeProjectId = state.activeProjectId;
+}
+
 function getActiveProject(){
     for (let project of appState.projects){
         if (project.getId() === appState.activeProjectId){
@@ -37,11 +42,16 @@ function getProjectById(id){
     return appState.projects.find(project => project.getId() === id);
 }
 
+function getState(){
+    return appState;
+}
+
 export {
     addProject,
     removeProject,
     setActiveProject,
+    hydrateState,
     getActiveProject,
     getProjectById,
-    appState,
+    getState,
 };
