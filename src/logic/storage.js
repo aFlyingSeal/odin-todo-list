@@ -1,5 +1,5 @@
-import Task from "./task";
-import Project from "./project";
+import Task from "../models/task";
+import Project from "../models/project";
 
 const KEY = "odin-todo-list";
 
