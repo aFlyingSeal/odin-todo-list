@@ -43,4 +43,5 @@ export {
     setActiveProject,
     getActiveProject,
     getProjectById,
+    appState,
 };
