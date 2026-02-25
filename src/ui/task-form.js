@@ -2,13 +2,23 @@ import Task from "../models/task";
 import { getProjectById } from "../logic/state";
 import { renderTaskList } from "./tasks-view";
 
+let currentProjectId = null;
+let initialized = false;
+
+function setCurrentProject(id){
+    currentProjectId = id;
+}
+
 function getTaskModal(){
     const taskModal = document.querySelector(".modal-task");
     return taskModal;
 }
 
-function initTaskForm(projectId){
-    const project = getProjectById(projectId);
+function initTaskForm(){
+    if (initialized){
+        return;
+    }
+    initialized = false;
 
     const modal = document.querySelector(".modal-task");
     const form = document.querySelector(".task-form");
@@ -22,6 +32,11 @@ function initTaskForm(projectId){
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
+        const project = getProjectById(currentProjectId);
+        if (!project){
+            return;
+        }
+
         const title = document.getElementById("task-title-input").value;
         const desc = document.getElementById("task-desc-input").value;
         const date = document.getElementById("date-input").value;
@@ -31,12 +46,13 @@ function initTaskForm(projectId){
         project.addTask(task);
 
         form.reset();
-        renderTaskList(projectId);
         modal.style.display = 'none';
+        renderTaskList(currentProjectId);
     });
 }
 
 export {
-    initTaskForm,
-    getTaskModal
+    setCurrentProject,
+    getTaskModal,
+    initTaskForm
 };

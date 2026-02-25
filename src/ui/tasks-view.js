@@ -1,15 +1,15 @@
 import { removeTask, getProjectById } from "../logic/state";
 import { renderProjectList } from "./projects-view";
-import { initTaskForm, getTaskModal } from "./task-form";
+import { getTaskModal, setCurrentProject } from "./task-form";
 
 function renderTaskList(projectId){
+    setCurrentProject(projectId);
+    
     const project = getProjectById(projectId);
     if (!project){
         renderProjectList();
         return;
     }
-
-    console.log(project);
 
     const mainContainer = document.getElementById("main-container");
     mainContainer.innerHTML = "";
@@ -69,6 +69,7 @@ function renderTaskList(projectId){
 
         const removeBtn = document.createElement("button");
         removeBtn.classList.add("remove-btn");
+        removeBtn.textContent = "Remove";
         removeBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             removeTask(projectId, task.getId());
@@ -77,11 +78,12 @@ function renderTaskList(projectId){
 
         btnContainer.appendChild(removeBtn);
 
+        taskCard.appendChild(btnContainer);
+
         tasksContainer.appendChild(taskCard);
     }
 
     mainContainer.append(headingContainer, pageSeparator, tasksContainer);
-    initTaskForm(projectId);
 }
 
 export { renderTaskList };
