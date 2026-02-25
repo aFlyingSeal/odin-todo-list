@@ -22,6 +22,15 @@ function removeProject(id){
     saveState(getState());
 }
 
+function removeTask(projectId, taskId){
+    const project = getProjectById(projectId);
+    if (!project){
+        return;
+    }
+    project.removeTask(taskId);
+    saveState(getState());
+}
+
 function setActiveProject(id){
     for (let project of appState.projects){
         if (project.getId() === id){
@@ -57,6 +66,7 @@ function getState(){
 export {
     addProject,
     removeProject,
+    removeTask,
     setActiveProject,
     hydrateState,
     getActiveProject,
