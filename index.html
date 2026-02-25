@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-btn-container">
+            <button id="display-projects-btn">Projects</button>
+        </div>
+        <button id="add-project-btn">New Project</button>
+    </div>
+
+    <div class="modal-project" id="project-form">
+        <h2>Add New Project</h2>
+        <form class="project-form">
+            <div class="input-container">
+                <label for="project-title-input">Title: </label>
+                <input type="text" id="project-title-input" name="project-title" required>
+            </div>
+            <div class="input-container">
+                <label for="project-desc-input">Description: </label>
+                <input type="text" id="project-desc-input" name="project-desc" required>
+            </div>
+            <div class="actions-container">
+                <button type="submit" id="submit-add-project">Add Project</button>
+                <button type="button" id="cancel-add-project">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-task" id="task-form">
+        <h2>Add New Task</h2>
+        <form class="task-form">
+            <div class="input-container">
+                <label for="task-title-input">Title: </label>
+                <input type="text" id="task-title-input" name="task-title" required>
+            </div>
+            <div class="input-container">
+                <label for="task-desc-input">Description: </label>
+                <input type="text" id="task-desc-input" name="task-desc" required>
+            </div>
+            <div class="input-container">
+                <label for="date-input">Due date: </label>
+                <input type="date" id="date-input" name="date" required>
+            </div>
+            <div class="input-container">
+                <label for="priority-input">Priority: </label>
+                <select id="priority-input" name="priority" required>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                    <option value="no">No priority</option>
+                </select>
+            </div>
+            <div class="actions-container">
+                <button type="submit" id="submit-add-task">Add Task</button>
+                <button type="button" id="cancel-add-task">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="main-container">
+
+    </div>
+</body>
+</html>
