@@ -3,6 +3,10 @@ import { renderProjectList } from "./projects-view";
 
 function renderTaskList(projectId){
     const project = getProjectById(projectId);
+    if (!project){
+        renderProjectList();
+        return;
+    }
 
     console.log(project);
 
@@ -48,7 +52,7 @@ function renderTaskList(projectId){
     //---------------------------------------------//
 
     const tasksContainer = document.createElement("div");
-    tasksContainer.classList.add("task-card");
+    tasksContainer.classList.add("task-container");
 
     for (let task of project.tasks){
         console.log(task);
