@@ -14,6 +14,8 @@ function getTaskModal(){
     return taskModal;
 }
 
+// IMPORTANT: initTaskForm must run once only.
+// Do NOT call from render functions.
 function initTaskForm(){
     if (initialized){
         return;
