@@ -1,5 +1,6 @@
 import { removeTask, getProjectById } from "../logic/state";
 import { renderProjectList } from "./projects-view";
+import { initTaskForm, getTaskModal } from "./task-form";
 
 function renderTaskList(projectId){
     const project = getProjectById(projectId);
@@ -13,8 +14,7 @@ function renderTaskList(projectId){
     const mainContainer = document.getElementById("main-container");
     mainContainer.innerHTML = "";
 
-    //---------------------------------------------//
-
+    // Create section for holding title, desc and return button
     const headingContainer = document.createElement("div");
     headingContainer.classList.add("heading-container");
 
@@ -34,8 +34,8 @@ function renderTaskList(projectId){
 
     headingContainer.append(infoContainer, returnBtn);
 
-    //---------------------------------------------//
-
+    // Create section to seperate the page in half
+    // I will possibly add a progress bar to this soon
     const pageSeparator = document.createElement("div");
     pageSeparator.classList.add("page-seperator");
 
@@ -43,20 +43,18 @@ function renderTaskList(projectId){
 
     const addTaskBtn = document.createElement("button");
     addTaskBtn.classList.add("add-task-btn");
-    addTaskBtn.textContent = "Add Task";
-    // event listener for this button
-    // pops up a form for adding task
-
+    addTaskBtn.textContent = "Add New Task";
+    addTaskBtn.addEventListener("click", () => {
+        getTaskModal().style.display = 'block';
+    });
+    
     pageSeparator.appendChild(addTaskBtn);
 
-    //---------------------------------------------//
-
+    // Create container to contain task card elements
     const tasksContainer = document.createElement("div");
     tasksContainer.classList.add("task-container");
 
     for (let task of project.tasks){
-        console.log(task);
-
         const taskCard = document.createElement("div");
         taskCard.classList.add("task-card");
 
@@ -83,6 +81,7 @@ function renderTaskList(projectId){
     }
 
     mainContainer.append(headingContainer, pageSeparator, tasksContainer);
+    initTaskForm(projectId);
 }
 
 export { renderTaskList };
