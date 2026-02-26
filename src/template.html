@@ -7,10 +7,20 @@
 </head>
 <body>
     <div class="nav-bar">
-        <div class="nav-btn-container">
-            <button id="display-projects-btn">Projects</button>
+        <div class="user-container">
+            <i class="bx bx-user-circle"></i>
+            <p>aFlyingSeal</p>
         </div>
-        <button id="add-project-btn">New Project</button>
+        <div class="nav-btn-container">
+            <div class="btn-wrapper">
+                <i class="bx bx-book"></i>
+                <button id="display-projects-btn">Projects</button>
+            </div>
+        </div>
+        <div class="bottom-btn-container">
+            <i class="bx bx-book-add"></i>
+            <button id="add-project-btn">New Project</button>
+        </div>
     </div>
 
     <div class="modal-project" id="project-form">
@@ -25,7 +35,7 @@
                 <input type="text" id="project-desc-input" name="project-desc" required>
             </div>
             <div class="actions-container">
-                <button type="submit" id="submit-add-project">Add Project</button>
+                <button type="submit" id="submit-add-project">Add</button>
                 <button type="button" id="cancel-add-project">Cancel</button>
             </div>
         </form>
