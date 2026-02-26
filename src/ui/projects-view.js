@@ -37,6 +37,7 @@ function renderProjectList(){
 
         const setActiveBtn = document.createElement("button");
         setActiveBtn.textContent = "Set Active";
+        setActiveBtn.classList.add("set-active-btn");
         setActiveBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             setActiveProject(project.getId());
@@ -44,6 +45,7 @@ function renderProjectList(){
         });
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove";
+        removeBtn.classList.add("remove-btn");
         removeBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             removeProject(project.getId());
