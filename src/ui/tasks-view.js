@@ -59,9 +59,11 @@ function renderTaskList(projectId){
         taskCard.classList.add("task-card");
 
         taskCard.innerHTML = `
-            <input type="checkbox">
-            <p>${task.title}</p>
-            <p>${task.dueDate}</p>
+            <input class="task-check" type="checkbox">
+            <div class="task-info-container">
+                <p>${task.title}</p>
+                <p>${task.dueDate}</p>
+            </div>
         `;
 
         const btnContainer = document.createElement("div");
