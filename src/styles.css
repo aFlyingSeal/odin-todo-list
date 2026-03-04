@@ -246,12 +246,123 @@ h2{
 /*  */
 
 .modal-task{
+    background-color: #FFFFFF;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10000;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#priority-input{
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 8px;
 }
 
 /*  */
 
+.heading-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-container h2{
+    font-size: 30px;
+    margin-top: 36px;
+}
+
+.info-container p{
+    font-size: 20px;
+}
+
+.heading-container button{
+    background-color: #3B82F6;
+    color: #E0F2FE;
+    height: 50%;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.heading-container button:hover{
+    cursor: pointer;
+    background-color: hsl(217, 91%, 70%);
+    transform: translateY(-2px);
+}
+
+.page-seperator{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+    margin-top: 36px;
+    margin-bottom: 36px;
+}
+
+.page-seperator h3{
+    font-size: 24px;
+}
+
+.page-seperator button{
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background-color: #3B82F6;
+    color: #E0F2FE;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page-seperator button:hover{
+    cursor: pointer;
+    background-color: hsl(217, 91%, 70%);
+    transform: translateY(-2px);
+}
+
+.task-container{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.task-card{
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    margin: 0 48px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.task-card:hover{
+    transform: translateY(-2px);
+}
+
+.task-check{
+    width: 20px;
+    height: 20px;
+}
+
+.task-info-container{
+    margin-left: 12px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.task-card .btn-container{
+    margin-left: auto;
+}
