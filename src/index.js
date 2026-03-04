@@ -1,3 +1,6 @@
+import "./styles.css";
+import "boxicons/css/boxicons.min.css";
+
 import { hydrateState, getActiveProject } from "./logic/state";
 import { clearState, loadState } from "./logic/storage";
 import { initNavBar, initProjectForm } from "./ui/nav-bar";
