@@ -340,9 +340,18 @@ h2{
     padding: 16px;
     border: none;
     border-radius: 12px;
+    border-left: 6px solid black;
     margin: 0 48px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.2s;
+}
+
+.task-card.checked{
+    background-color: hsl(0, 0%, 90%);
+}
+
+.task-card.checked p{
+    text-decoration: line-through;
 }
 
 .task-card:hover{
