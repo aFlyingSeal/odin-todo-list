@@ -58,13 +58,30 @@ function renderTaskList(projectId){
         const taskCard = document.createElement("div");
         taskCard.classList.add("task-card");
 
-        taskCard.innerHTML = `
-            <input class="task-check" type="checkbox">
-            <div class="task-info-container">
-                <p>${task.title}</p>
-                <p>${task.dueDate}</p>
-            </div>
+        // Add a checkbox to each task card
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.classList.add("task-check");
+        checkbox.addEventListener("change", function(){
+            if (this.checked){
+                taskCard.classList.add("checked");
+            }
+            else{
+                taskCard.classList.remove("checked");
+            }
+        });
+
+        taskCard.appendChild(checkbox);
+
+        // Display the title and dueDate on each card
+        const taskInfoContainer = document.createElement("div");
+        taskInfoContainer.classList.add("task-info-container");
+        taskInfoContainer.innerHTML = `
+            <p>${task.title}</p>
+            <p>${task.dueDate}</p>
         `;
+
+        taskCard.appendChild(taskInfoContainer);
 
         const btnContainer = document.createElement("div");
         btnContainer.classList.add("btn-container");
