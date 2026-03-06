@@ -48,6 +48,7 @@ HTML, CSS, JavaScript (ES Modules) and Webpack (for bundling)
 
 ## Possible Future Features:
 
-- [ ] Edit task details (title, description, priority, etc.)
+- [x] Edit task details (title, description, priority, etc.)
 - [ ] Sorting and filtering through tasks on the sidebar.
 - [ ] Add a progress bar for each project.
+- [ ] Smooth transitions for the page.
