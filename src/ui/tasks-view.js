@@ -1,6 +1,6 @@
 import { removeTask, getProjectById } from "../logic/state";
 import { renderProjectList } from "./projects-view";
-import { getTaskModal, setCurrentProject, openEditTask } from "./task-form";
+import { setCurrentProject, openCreateTaskModal, openEditTaskModal } from "./task-form";
 
 function renderTaskList(projectId){
     setCurrentProject(projectId);
@@ -45,7 +45,7 @@ function renderTaskList(projectId){
     addTaskBtn.classList.add("add-task-btn");
     addTaskBtn.textContent = "Add New Task";
     addTaskBtn.addEventListener("click", () => {
-        getTaskModal().style.display = 'block';
+        openCreateTaskModal(projectId);
     });
     
     pageSeparator.appendChild(addTaskBtn);
@@ -101,7 +101,7 @@ function renderTaskList(projectId){
         editBtn.textContent = "Edit";
         editBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            openEditTask(task.getId());
+            openEditTaskModal(task.getId());
         });
 
         btnContainer.appendChild(removeBtn);

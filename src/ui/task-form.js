@@ -66,7 +66,17 @@ function initTaskForm(){
     });
 }
 
-function openEditTask(taskId){
+function openCreateTaskModal(projectId){
+    currentProjectId = projectId;
+
+    const modal = document.querySelector(".modal-task");
+    const form = document.querySelector(".task-form");
+
+    form.reset();
+    modal.style.display = 'block';
+}
+
+function openEditTaskModal(taskId){
     currentTaskId = taskId;
 
     const project = getProjectById(currentProjectId);
@@ -86,5 +96,6 @@ export {
     setCurrentProject,
     getTaskModal,
     initTaskForm,
-    openEditTask,
+    openCreateTaskModal,
+    openEditTaskModal,
 };
