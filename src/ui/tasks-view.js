@@ -2,18 +2,7 @@ import { removeTask, getProjectById } from "../logic/state";
 import { renderProjectList } from "./projects-view";
 import { setCurrentProject, openCreateTaskModal, openEditTaskModal } from "./task-form";
 
-function renderTaskList(projectId){
-    setCurrentProject(projectId);
-    
-    const project = getProjectById(projectId);
-    if (!project){
-        renderProjectList();
-        return;
-    }
-
-    const mainContainer = document.getElementById("main-container");
-    mainContainer.innerHTML = "";
-
+function createPageElements(project){
     // Create section for holding title, desc and return button
     const headingContainer = document.createElement("div");
     headingContainer.classList.add("heading-container");
@@ -45,74 +34,94 @@ function renderTaskList(projectId){
     addTaskBtn.classList.add("add-task-btn");
     addTaskBtn.textContent = "Add New Task";
     addTaskBtn.addEventListener("click", () => {
-        openCreateTaskModal(projectId);
+        openCreateTaskModal(project.getId());
     });
     
     pageSeparator.appendChild(addTaskBtn);
+
+    return [ headingContainer, pageSeparator ];
+}
+
+function createTaskCard(task){
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("task-card");
+
+    // Add a checkbox to each task card
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.classList.add("task-check");
+    checkbox.addEventListener("change", function(){
+        if (this.checked){
+            taskCard.classList.add("checked");
+        }
+        else{
+            taskCard.classList.remove("checked");
+        }
+    });
+
+    taskCard.appendChild(checkbox);
+
+    // Display the title and dueDate on each card
+    const taskInfoContainer = document.createElement("div");
+    taskInfoContainer.classList.add("task-info-container");
+    taskInfoContainer.innerHTML = `
+        <p>${task.title}</p>
+        <p>Due Date: ${task.dueDate}</p>
+    `;
+
+    taskCard.appendChild(taskInfoContainer);
+
+    const btnContainer = document.createElement("div");
+    btnContainer.classList.add("btn-container");
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove-task-btn");
+    removeBtn.textContent = "Remove";
+    removeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        removeTask(projectId, task.getId());
+        renderTaskList(projectId);
+    });
+
+    // Button for editing tasks
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("edit-task-btn");
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openEditTaskModal(task.getId());
+    });
+
+    btnContainer.appendChild(removeBtn);
+    btnContainer.appendChild(editBtn);
+
+    taskCard.appendChild(btnContainer);
+
+    return taskCard;
+}
+
+function renderTaskList(projectId){
+    setCurrentProject(projectId);
+    
+    const project = getProjectById(projectId);
+    if (!project){
+        renderProjectList();
+        return;
+    }
+
+    const mainContainer = document.getElementById("main-container");
+    mainContainer.innerHTML = "";
 
     // Create container to contain task card elements
     const tasksContainer = document.createElement("div");
     tasksContainer.classList.add("task-container");
 
     for (let task of project.tasks){
-        const taskCard = document.createElement("div");
-        taskCard.classList.add("task-card");
-
-        // Add a checkbox to each task card
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.classList.add("task-check");
-        checkbox.addEventListener("change", function(){
-            if (this.checked){
-                taskCard.classList.add("checked");
-            }
-            else{
-                taskCard.classList.remove("checked");
-            }
-        });
-
-        taskCard.appendChild(checkbox);
-
-        // Display the title and dueDate on each card
-        const taskInfoContainer = document.createElement("div");
-        taskInfoContainer.classList.add("task-info-container");
-        taskInfoContainer.innerHTML = `
-            <p>${task.title}</p>
-            <p>${task.dueDate}</p>
-        `;
-
-        taskCard.appendChild(taskInfoContainer);
-
-        const btnContainer = document.createElement("div");
-        btnContainer.classList.add("btn-container");
-
-        const removeBtn = document.createElement("button");
-        removeBtn.classList.add("remove-task-btn");
-        removeBtn.textContent = "Remove";
-        removeBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            removeTask(projectId, task.getId());
-            renderTaskList(projectId);
-        });
-
-        // Button for editing tasks
-        const editBtn = document.createElement("button");
-        editBtn.classList.add("edit-task-btn");
-        editBtn.textContent = "Edit";
-        editBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            openEditTaskModal(task.getId());
-        });
-
-        btnContainer.appendChild(removeBtn);
-        btnContainer.appendChild(editBtn);
-
-        taskCard.appendChild(btnContainer);
-
+        const taskCard = createTaskCard(task);
         tasksContainer.appendChild(taskCard);
     }
 
-    mainContainer.append(headingContainer, pageSeparator, tasksContainer);
+    mainContainer.append(...createPageElements(project), tasksContainer);
 }
 
 export { renderTaskList };
