@@ -375,3 +375,25 @@ h2{
 .task-card .btn-container{
     margin-left: auto;
 }
+
+.remove-task-btn{
+    color: #FFFFFF;
+    background-color: #ef4444;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.remove-task-btn:hover{
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+.edit-task-btn{
+    color: #FFFFFF;
+    background-color: #3B82F6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.edit-task-btn:hover{
+    cursor: pointer;
+    transform: translateY(-2px);
+}
