@@ -67,22 +67,46 @@ function initTaskForm(){
 }
 
 function openCreateTaskModal(projectId){
+    const modalTitle = document.querySelector(".modal-task-title");
+    modalTitle.textContent = "Add New Task";
+    
+    const submitTaskBtn = document.getElementById("submit-add-task");
+    submitTaskBtn.textContent = "Add Task";
+
     currentProjectId = projectId;
 
     const modal = document.querySelector(".modal-task");
     const form = document.querySelector(".task-form");
+
+    const inputs = form.querySelectorAll("input, textarea, select");
+    const submitBtn = form.querySelector("button[type='submit']");
+
+    inputs.forEach(input => input.disabled = false);
+    submitBtn.style.display = 'block';
 
     form.reset();
     modal.style.display = 'block';
 }
 
 function openEditTaskModal(taskId){
+    const modalTitle = document.querySelector(".modal-task-title");
+    modalTitle.textContent = "Edit Task";
+
+    const submitTaskBtn = document.getElementById("submit-add-task");
+    submitTaskBtn.textContent = "Update";
+
     currentTaskId = taskId;
 
     const project = getProjectById(currentProjectId);
     const task = project.getTaskById(taskId);
 
     const form = document.querySelector(".modal-task");
+
+    const inputs = form.querySelectorAll("input, textarea, select");
+    const submitBtn = form.querySelector("button[type='submit']");
+
+    inputs.forEach(input => input.disabled = false);
+    submitBtn.style.display = 'block';
 
     document.getElementById("task-title-input").value = task.title;
     document.getElementById("task-desc-input").value = task.description;
@@ -92,10 +116,41 @@ function openEditTaskModal(taskId){
     form.style.display = 'block';
 }
 
+function openViewTaskModal(taskId){
+    const modalTitle = document.querySelector(".modal-task-title");
+    modalTitle.textContent = "Viewing Details";
+
+    const project = getProjectById(currentProjectId);
+    const task = project.getTaskById(taskId);
+
+    const modal = document.querySelector(".modal-task");
+
+    const titleInput = document.getElementById("task-title-input");
+    const descInput = document.getElementById("task-desc-input");
+    const priorityInput = document.getElementById("priority-input");
+    const dateInput = document.getElementById("date-input");
+
+    const submitBtn = document.querySelector(".task-form button[type='submit']");
+
+    titleInput.value = task.title;
+    descInput.value = task.description;
+    priorityInput.value = task.priority;
+    dateInput.value = task.dueDate;
+
+    titleInput.disabled = true;
+    descInput.disabled = true;
+    priorityInput.disabled = true;
+    dateInput.disabled = true;
+
+    submitBtn.style.display = 'none';
+    modal.style.display = 'block';
+}
+
 export {
     setCurrentProject,
     getTaskModal,
     initTaskForm,
     openCreateTaskModal,
     openEditTaskModal,
+    openViewTaskModal
 };

@@ -1,6 +1,6 @@
 import { removeTask, getProjectById } from "../logic/state";
 import { renderProjectList } from "./projects-view";
-import { setCurrentProject, openCreateTaskModal, openEditTaskModal } from "./task-form";
+import { setCurrentProject, openCreateTaskModal, openEditTaskModal, openViewTaskModal } from "./task-form";
 
 function createPageElements(project){
     // Create section for holding title, desc and return button
@@ -96,6 +96,10 @@ function createTaskCard(task){
     btnContainer.appendChild(editBtn);
 
     taskCard.appendChild(btnContainer);
+
+    taskCard.addEventListener("click", () => {
+        openViewTaskModal(task.getId());
+    });
 
     return taskCard;
 }
