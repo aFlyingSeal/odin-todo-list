@@ -1,6 +1,6 @@
 import { removeTask, getProjectById } from "../logic/state";
 import { renderProjectList } from "./projects-view";
-import { getTaskModal, setCurrentProject } from "./task-form";
+import { getTaskModal, setCurrentProject, openEditTask } from "./task-form";
 
 function renderTaskList(projectId){
     setCurrentProject(projectId);
@@ -87,7 +87,7 @@ function renderTaskList(projectId){
         btnContainer.classList.add("btn-container");
 
         const removeBtn = document.createElement("button");
-        removeBtn.classList.add("remove-btn");
+        removeBtn.classList.add("remove-task-btn");
         removeBtn.textContent = "Remove";
         removeBtn.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -95,7 +95,17 @@ function renderTaskList(projectId){
             renderTaskList(projectId);
         });
 
+        // Button for editing tasks
+        const editBtn = document.createElement("button");
+        editBtn.classList.add("edit-task-btn");
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openEditTask(task.getId());
+        });
+
         btnContainer.appendChild(removeBtn);
+        btnContainer.appendChild(editBtn);
 
         taskCard.appendChild(btnContainer);
 

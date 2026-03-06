@@ -3,6 +3,7 @@ import { getProjectById } from "../logic/state";
 import { renderTaskList } from "./tasks-view";
 
 let currentProjectId = null;
+let currentTaskId = null;
 let initialized = false;
 
 function setCurrentProject(id){
@@ -20,7 +21,7 @@ function initTaskForm(){
     if (initialized){
         return;
     }
-    initialized = false;
+    initialized = true;
 
     const modal = document.querySelector(".modal-task");
     const form = document.querySelector(".task-form");
@@ -44,8 +45,20 @@ function initTaskForm(){
         const date = document.getElementById("date-input").value;
         const priority = document.getElementById("priority-input").value;
 
-        const task = new Task(title, desc, date, priority);
-        project.addTask(task);
+        if (currentTaskId){
+            const task = project.getTaskById(currentTaskId);
+
+            task.title = title;
+            task.desc = desc;
+            task.date = date;
+            task.priority = priority;
+
+            currentTaskId = null;
+        }
+        else{
+            const task = new Task(title, desc, date, priority);
+            project.addTask(task);
+        }
 
         form.reset();
         modal.style.display = 'none';
@@ -53,8 +66,25 @@ function initTaskForm(){
     });
 }
 
+function openEditTask(taskId){
+    currentTaskId = taskId;
+
+    const project = getProjectById(currentProjectId);
+    const task = project.getTaskById(taskId);
+
+    const form = document.querySelector(".modal-task");
+
+    document.getElementById("task-title-input").value = task.title;
+    document.getElementById("task-desc-input").value = task.description;
+    document.getElementById("priority-input").value = task.priority;
+    document.getElementById("date-input").value = task.dueDate;
+
+    form.style.display = 'block';
+}
+
 export {
     setCurrentProject,
     getTaskModal,
-    initTaskForm
+    initTaskForm,
+    openEditTask,
 };
