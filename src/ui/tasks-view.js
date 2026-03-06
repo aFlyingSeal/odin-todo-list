@@ -50,6 +50,9 @@ function createTaskCard(task){
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList.add("task-check");
+    checkbox.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
     checkbox.addEventListener("change", function(){
         if (this.checked){
             taskCard.classList.add("checked");
