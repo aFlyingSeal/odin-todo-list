@@ -42,7 +42,7 @@ function createPageElements(project){
     return [ headingContainer, pageSeparator ];
 }
 
-function createTaskCard(task){
+function createTaskCard(project, task){
     const taskCard = document.createElement("div");
     taskCard.classList.add("task-card");
 
@@ -82,8 +82,8 @@ function createTaskCard(task){
     removeBtn.textContent = "Remove";
     removeBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        removeTask(projectId, task.getId());
-        renderTaskList(projectId);
+        removeTask(project.getId(), task.getId());
+        renderTaskList(project.getId());
     });
 
     // Button for editing tasks
@@ -124,7 +124,7 @@ function renderTaskList(projectId){
     tasksContainer.classList.add("task-container");
 
     for (let task of project.tasks){
-        const taskCard = createTaskCard(task);
+        const taskCard = createTaskCard(project, task);
         tasksContainer.appendChild(taskCard);
     }
 
