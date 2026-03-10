@@ -92,7 +92,7 @@ body{
 #main-container{
     overflow-y: scroll;
     background-color: #F8FAFC;
-    padding: 0 32px 0 32px;
+    padding: 0 32px 32px 32px;
 }
 
 h2{

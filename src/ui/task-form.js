@@ -100,7 +100,8 @@ function openEditTaskModal(taskId){
     const project = getProjectById(currentProjectId);
     const task = project.getTaskById(taskId);
 
-    const form = document.querySelector(".modal-task");
+    const modal = document.querySelector(".modal-task");
+    const form = document.getElementById("task-form");
 
     const inputs = form.querySelectorAll("input, textarea, select");
     const submitBtn = form.querySelector("button[type='submit']");
